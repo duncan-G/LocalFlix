@@ -1,0 +1,6 @@
+.movieWrapper {
+  display: flex;
+  min-height: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
