@@ -10,6 +10,8 @@ import { makeSelectMovie, makeSelectMoviesLoaded } from '../Movies/selectors';
 import { fetchMovies } from '../Movies/actions';
 import { Page404 } from '../../components/Pages';
 
+import './WatchMovie.css';
+
 class WatchMovie extends React.Component {
   constructor(props) {
     super(props);
@@ -18,15 +20,26 @@ class WatchMovie extends React.Component {
     };
   }
 
+  mockUrl() {
+    return Math.random() > 0.5
+      ? 'https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8'
+      : process.env.REACT_APP_SERVER_URL + 'media/movies/big_buck_bunny.mp4';
+  }
   render() {
     console.log(this.props);
     if (this.props.movie === 'Not Found') {
       return <Page404 />;
     } else {
       return (
-        <ReactPlayer
-          url={process.env.REACT_APP_SERVER_URL + this.props.movie.mediaUrl}
-        />
+        <div className="movieWrapper">
+          <div className="movie">
+            <h1>{this.props.movie.name} The Movie </h1>
+            <ReactPlayer
+              url={this.mockUrl()}
+              controls={true}
+            />
+          </div>
+        </div>
       );
     }
   }
